@@ -8,14 +8,8 @@ Welcome to the **Wikipedia Speedrunner**! This isn't your average "click random 
 
 ## 📸 See It In Action
 
-<!-- 
-USER INSTRUCTION: 
-Take a screenshot of your terminal running the bot. 
-Make sure it shows the "Goal", "Current Page", and "Best link" output.
-Save it as 'demo_run.png' in this folder and uncomment the line below.
--->
 
-<!-- ![Terminal Demo](demo_run.png) -->
+<img src="./demo_run.png" alt="Terminal Demo" width="800"/>
 
 *(Place your screenshot here! Show off that terminal glory.)*
 
@@ -70,20 +64,8 @@ We asked it to go from **Potato** to **Barack Obama**. It took a scenic route th
 
 Want to see what the bot is thinking? Check the `logs/` folder.
 
-```log
-2025-11-27 00:10:32 - Main - INFO - Step 1: Visiting https://en.wikipedia.org/wiki/Potato
-2025-11-27 00:10:33 - Scraper - INFO - Scraped 554 links from https://en.wikipedia.org/wiki/Potato
-2025-11-27 00:10:33 - Similarity - INFO - Best match: 'Anton Mauve' with score 0.4631
-2025-11-27 00:10:33 - Main - INFO - Step 2: Visiting https://en.wikipedia.org/wiki/Anton_Mauve
-```
 
-<!-- 
-USER INSTRUCTION: 
-Take a screenshot of a particularly funny or interesting log sequence.
-Save it as 'log_snippet.png' and uncomment the line below.
--->
-
-<!-- ![Log Snippet](log_snippet.png) -->
+<img src="./log_snippet.png" alt="Log Snippet" width="800"/>
 
 ---
 
