@@ -1,110 +1,134 @@
-# 🏎️ Wikipedia Speedrunner (Python Edition)
+# 🏎️ Wiki-Racer (Python Edition)
 
 > *Because clicking links manually is so 2010.*
 
-Welcome to the **Wikipedia Speedrunner**! This isn't your average "click random links until you find Jesus" bot. This is a **smart**, AI-powered racer that uses vector embeddings to *understand* the meaning of words and navigate Wikipedia like a pro.
+Welcome to **Wiki-Racer**! This is an AI-powered speedrunner that navigates Wikipedia not by random chance, but by *understanding* the meaning of words. It uses vector embeddings to find the semantic "scent" of your target page and chases it down like a bloodhound with a PhD. 🎓🐕
 
 ---
 
 ## 📸 See It In Action
 
-
 <img src="./demo_run.png" alt="Terminal Demo" width="800"/>
 
-*(Place your screenshot here! Show off that terminal glory.)*
+*(Yes, it actually works. We have the screenshots to prove it.)*
 
 ---
 
-## 🧠 How It Works (The Magic)
+## 🧠 Key Features
 
-Most bots just look for keywords. We do it differently:
+Wiki-Racer is engineered for speed, accuracy, and making you feel like a wizard.
 
-1.  **Scrape**: We grab all the links from the current Wikipedia page.
-2.  **Embed**: We use `sentence-transformers` to turn every link text into a **vector** (a list of numbers representing meaning).
-3.  **Compare**: We calculate the **Cosine Similarity** between those link vectors and your **Target Goal** vector.
-4.  **Race**: We pick the link with the highest score and jump to it!
-
-It's like playing "Hot or Cold" but with high-dimensional mathematics. 🤓
-
----
-
-## 📊 Visualizing the Data
-
-The bot saves every run to `data/speed_runs.json`. Here is what a run looks like:
-
-### Example: The "SpongeBob" Run 🧽 ➡️ 🐟
-
-We asked the bot to go from **SpongeBob SquarePants** to **Marine biology**.
-
-```json
-{
-    "start_url": "https://en.wikipedia.org/wiki/SpongeBob_SquarePants",
-    "end_url": "https://en.wikipedia.org/wiki/Marine_biology",
-    "path": [
-        "https://en.wikipedia.org/wiki/SpongeBob_SquarePants",
-        "https://en.wikipedia.org/wiki/Marine_biology"
-    ],
-    "steps": 2,
-    "time_taken_seconds": 1.55
-}
-```
-*It found the direct link immediately!*
-
-### Example: The "Potato" Odyssey 🥔 ➡️ 🇺🇸
-
-We asked it to go from **Potato** to **Barack Obama**. It took a scenic route through art, music, and history:
-
-> Potato -> Anton Mauve -> White House at Night -> ... -> Michelle Obama -> Barack Obama
-
-*(It turns out potatoes are surprisingly well-connected to the White House via Dutch painters!)*
+*   **🧠 Deep Semantic Pathfinding**: The secret sauce. Instead of just matching keywords, we use `sentence-transformers` to understand that "King" is close to "Queen" but far from "Potato". (Unless it's a Potato King. We don't judge.)
+*   **🎯 High-Precision Similarity**: We use optimized **NumPy vectorization** (dot products) to rank thousands of links in milliseconds. It’s math, but faster.
+*   **🦀 Robust Scraper**: Our custom scraper (`scraper.py`) handles Wikipedia's HTML quirks and politely identifies itself to avoid the ban hammer.
+*   **⏱️ Automatic Logging**: Every run is saved to a date-stamped log file. Perfect for debugging or reliving your greatest speedrun glories.
+*   **📈 Stats & Analytics**: We track your runs in `data/speed_runs.json` so you can calculate average times and prove to your friends that your bot is faster than theirs.
 
 ---
 
-## 📝 Log Snapshots
+## ⚙️ Architecture & Workflow
 
-Want to see what the bot is thinking? Check the `logs/` folder.
+How does it actually work? Here is the flow of a single run:
 
-
-<img src="./log_snippet.png" alt="Log Snippet" width="800"/>
-
----
-
-## 🚀 Getting Started
-
-### 1. Clone & Install
-```bash
-git clone https://github.com/Deepender25/Wiki-Racer.git
-cd Wiki-Racer
-python -m venv venv
-# Windows
-.\venv\Scripts\activate
-# Mac/Linux
-# source venv/bin/activate
-
-pip install -r requirements.txt
+```mermaid
+graph TD
+    A[Start] --> B{Initialize Models}
+    B --> C[User Inputs URLs]
+    C --> D(Current Page)
+    D --> E{Is Target?}
+    E -- Yes --> F[🎉 VICTORY!]
+    E -- No --> G[Scrape Links]
+    G --> H[Generate Embeddings]
+    H --> I[Calculate Cosine Similarity]
+    I --> J[Select Best Link]
+    J --> D
 ```
 
-### 2. Run the Racer
-```bash
-python main.py
-```
-
-### 3. Enter Your Challenge
-```text
-Enter Start Wikipedia URL (or term): Batman
-Enter End Wikipedia URL (or term): Superman
-```
+The system is built entirely in Python, utilizing:
+*   **Scraping**: `beautifulsoup4` & `requests`
+*   **Intelligence**: `sentence-transformers`
+*   **Math**: `numpy` (for that sweet, sweet vectorization)
 
 ---
 
 ## 📂 Project Structure
 
-*   `src/scraper.py`: The web crawler (handles the HTML).
-*   `src/embeddings.py`: The brain (loads the AI model).
-*   `src/similarity.py`: The math (calculates vectors).
-*   `src/stats.py`: The historian (saves your runs).
-*   `logs/`: Where the bot writes its diary.
-*   `data/`: Where your speedrun records live.
+We keep things tidy around here.
+
+```text
+wikipedia_run_python_manual/
+├── 📄 demo_run.png              # Proof that it works
+├── 📄 log_snippet.png           # What the matrix looks like
+├── 📄 requirements.txt          # The "ingredients" list
+├── 📄 README.md                 # You are here
+├── 📄 main.py                   # The big red button (Entry Point)
+└── 📂 src/                      # The Brains
+    ├── 📄 scraper.py            # The Grabber (Fetches links)
+    ├── � embeddings.py         # The Thinker (Loads AI models)
+    ├── 📄 similarity.py         # The Judge (Compares vectors)
+    ├── 📄 stats.py              # The Accountant (Saves records)
+    └── 📄 logger_config.py      # The Scribe (Writes logs)
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+*   **Python 3.x** (The snake language)
+*   **pip** (The package installer)
+
+### Installation
+
+1.  **Clone the Repo**
+    ```bash
+    git clone https://github.com/Deepender25/Wiki-Racer.git
+    cd Wiki-Racer
+    ```
+
+2.  **Set up the Environment**
+    ```bash
+    python -m venv venv
+    # Windows
+    .\venv\Scripts\activate
+    # Mac/Linux
+    # source venv/bin/activate
+    ```
+
+3.  **Install Dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+---
+
+## 🔧 Usage
+
+To start a race, just run the main script. It's interactive, so it will ask you where to start and where to go.
+
+```bash
+python main.py
+```
+
+**Example Session:**
+```text
+Welcome to Wikipedia Speedrunner (Python Edition)!
+--------------------------------------------------
+Enter Start Wikipedia URL (or term): Batman
+Enter End Wikipedia URL (or term): Superman
+
+Goal: https://en.wikipedia.org/wiki/Batman -> https://en.wikipedia.org/wiki/Superman
+Initializing models... (Hold on tight)
+...
+[Step 1] Visiting Batman...
+Best link: Justice League
+...
+>>> TARGET REACHED! <<<
+```
+
+### 📝 Logs & Stats
+Check the `logs/` folder to see exactly what the bot was "thinking" at each step.
+Check `data/speed_runs.json` to see your high scores.
 
 ---
 
@@ -112,11 +136,11 @@ Enter End Wikipedia URL (or term): Superman
 
 Got a better pathfinding algorithm? Found a bug?
 1.  Fork it.
-2.  Branch it (`git checkout -b feature/cool-thing`).
+2.  Branch it.
 3.  Commit it.
 4.  Push it.
-5.  Pull Request it.
+5.  **Pull Request it.**
 
 ---
 
-*Made with 🐍, 🤖, and a lot of Wikipedia reading.*
+*Made with 🐍, 🤖, and a healthy obsession with graph theory.*
