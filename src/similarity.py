@@ -1,4 +1,4 @@
-from sklearn.metrics.pairwise import cosine_similarity
+# from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from src.logger_config import setup_logger
 
@@ -20,14 +20,16 @@ def find_closest(target_embedding, candidates):
 
     try:
         # Extract embeddings from candidates
-        candidate_embeddings = [c[2] for c in candidates]
+        # Stack them into a numpy array for vectorized operation
+        candidate_embeddings = np.array([c[2] for c in candidates])
         
-        # Reshape target for sklearn (1, n_features)
-        target_reshaped = target_embedding.reshape(1, -1)
+        # Target embedding is already a 1D array (shape: (384,))
+        # Candidate embeddings is 2D array (shape: (N, 384))
         
-        # Calculate similarities
-        # cosine_similarity returns a matrix, we want the first row
-        similarities = cosine_similarity(target_reshaped, candidate_embeddings)[0]
+        # Calculate dot products (Vectorized Inner Product)
+        # Since embeddings are normalized, Dot Product = Cosine Similarity
+        # This is much faster than sklearn's generic cosine_similarity for this specific case
+        similarities = np.dot(candidate_embeddings, target_embedding)
         
         # Find index of max similarity
         best_index = np.argmax(similarities)

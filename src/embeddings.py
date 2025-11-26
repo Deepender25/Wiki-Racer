@@ -24,7 +24,8 @@ def get_embedding(text):
     """
     model = load_model()
     try:
-        embedding = model.encode(text)
+        # Normalize embeddings to allow dot product usage for cosine similarity
+        embedding = model.encode(text, normalize_embeddings=True)
         return embedding
     except Exception as e:
         logger.error(f"Error generating embedding for '{text}': {e}")
@@ -36,7 +37,8 @@ def get_embeddings(texts):
     """
     model = load_model()
     try:
-        embeddings = model.encode(texts)
+        # Normalize embeddings to allow dot product usage for cosine similarity
+        embeddings = model.encode(texts, normalize_embeddings=True)
         return embeddings
     except Exception as e:
         logger.error(f"Error generating embeddings for list of size {len(texts)}: {e}")
